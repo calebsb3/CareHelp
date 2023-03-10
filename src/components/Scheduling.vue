@@ -11,9 +11,9 @@
     :events="events"
     :on-event-click="onEventClick"
   />
-  <GDialog v-model="showDialog">
-    {{ selectedEvent.assignedUser }}
-  </GDialog>
+  <div>{{ selectedEvent.start }}</div>
+
+  <div>{{ selectedEvent.helper }}</div>
 </template>
 
 <script setup lang="ts">
@@ -21,8 +21,8 @@ import { ref } from 'vue';
 import VueCal from 'vue-cal';
 import 'vue-cal/dist/vuecal.css';
 
-let showDialog = false;
-let selectedEvent = {};
+let showDialog = ref(false);
+let selectedEvent = ref({});
 
 let events: any = [
   {
@@ -34,7 +34,7 @@ let events: any = [
     title: 'Doctor appointment',
     content: '<i class="icon material-icons">local_hospital</i>',
     class: 'health',
-    assignedUser: 'Caleb',
+    helper: 'Caleb',
   },
 ];
 
