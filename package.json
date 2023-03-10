@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "gitart-vue-dialog": "^2.4.1",
     "vue": "^3.2.47",
     "vue-cal": "^4.8.1"
   },

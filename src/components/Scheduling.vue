@@ -11,9 +11,23 @@
     :events="events"
     :on-event-click="onEventClick"
   />
-  <div>{{ selectedEvent.start }}</div>
+  <GDialog v-model="showDialog"
+    ><div class="wrapper">
+      <div class="content">
+        <div class="title">Assigned Helper</div>
 
-  <div>{{ selectedEvent.helper }}</div>
+        <p>
+          {{ selectedEvent.helper }}
+        </p>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn--outline-gray" @click="showDialog = false">
+          Ok
+        </button>
+      </div>
+    </div></GDialog
+  >
 </template>
 
 <script setup lang="ts">
@@ -39,19 +53,35 @@ let events: any = [
 ];
 
 function onEventClick(event, e) {
-  selectedEvent = event;
-  showDialog = true;
-  console.log(showDialog);
+  selectedEvent.value = event;
+  showDialog.value = true;
   // Prevent navigating to narrower view (default vue-cal behavior).
   e.stopPropagation();
 }
 </script>
 
 <style scoped>
-.read-the-docs {
-  color: #888;
-}
 .vuecal__event.health {
   background-color: rgba(76, 172, 175, 0.35);
+}
+.wrapper {
+  color: #000;
+}
+
+.content {
+  padding: 20px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 </style>
