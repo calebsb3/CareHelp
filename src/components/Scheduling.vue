@@ -14,11 +14,16 @@
   <GDialog v-model="showDialog"
     ><div class="wrapper">
       <div class="content">
-        <div class="title">Assigned Helper</div>
-
-        <p>
-          {{ selectedEvent.helper }}
-        </p>
+        <div v-if="selectedEvent.helper">
+          <div class="title">Assigned Helper</div>
+          <p>
+            {{ selectedEvent.helper }}
+          </p>
+        </div>
+        <div v-else>
+          <div class="title">Input Name of Helper</div>
+          <input />
+        </div>
       </div>
 
       <div class="actions">
@@ -40,14 +45,14 @@ let selectedEvent = ref({});
 
 let events: any = [
   {
+    start: '2023-03-12 10:30',
+    end: '2023-03-12 12:30',
+    class: 'available',
+  },
+  {
     start: '2023-03-11 10:30',
     end: '2023-03-11 12:30',
-    // You can also define event dates with Javascript Date objects:
-    // start: new Date(2018, 11 - 1, 16, 10, 30),
-    // end: new Date(2018, 11 - 1, 16, 11, 30),
-    title: 'Doctor appointment',
-    content: '<i class="icon material-icons">local_hospital</i>',
-    class: 'health',
+    class: 'selected',
     helper: 'Caleb',
   },
 ];
@@ -61,9 +66,6 @@ function onEventClick(event, e) {
 </script>
 
 <style scoped>
-.vuecal__event.health {
-  background-color: rgba(76, 172, 175, 0.35);
-}
 .wrapper {
   color: #000;
 }
@@ -83,5 +85,13 @@ function onEventClick(event, e) {
   justify-content: flex-end;
   padding: 10px 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+</style>
+<style>
+.vuecal__event.available {
+  background-color: tomato;
+}
+.vuecal__event.selected {
+  background-color: springgreen;
 }
 </style>
