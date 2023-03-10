@@ -1,8 +1,25 @@
+<template>
+  <div class="health">
+    <h3>Times needed to help with Grandma</h3>
+  </div>
+  <vue-cal
+    style="height: 500px"
+    hide-view-selector
+    active-view="week"
+    xsmall
+    :disable-views="['years', 'year']"
+    :events="events"
+    :on-event-click="onEventClick"
+  />
+  <GDialog v-model="showDialog">
+    {{ selectedEvent.assignedUser }}
+  </GDialog>
+</template>
+
 <script setup lang="ts">
 import { ref } from 'vue';
 import VueCal from 'vue-cal';
 import 'vue-cal/dist/vuecal.css';
-import GDialog from 'gitart-vue-dialog';
 
 let showDialog = false;
 let selectedEvent = {};
@@ -29,24 +46,6 @@ function onEventClick(event, e) {
   e.stopPropagation();
 }
 </script>
-
-<template>
-  <div class="health">
-    <h3>Times needed to help with Grandma</h3>
-  </div>
-  <vue-cal
-    style="height: 500px"
-    hide-view-selector
-    active-view="week"
-    xsmall
-    :disable-views="['years', 'year']"
-    :events="events"
-    :on-event-click="onEventClick"
-  />
-  <GDialog v-model="showDialog">
-    {{ selectedEvent.assignedUser }}
-  </GDialog>
-</template>
 
 <style scoped>
 .read-the-docs {
